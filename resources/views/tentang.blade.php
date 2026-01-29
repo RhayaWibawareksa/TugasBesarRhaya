@@ -168,7 +168,7 @@
         <div class="container text-center">
             <h2 class="mb-4">Bergabunglah dengan Kami!</h2>
             <p class="lead mb-4">Mulai perjalanan belajar Anda bersama LogicGen hari ini.</p>
-            <a href="daftar" class="btn btn-custom btn-lg">Daftar Sekarang</a>
+            <a href="register" class="btn btn-custom btn-lg">Daftar Sekarang</a>
         </div>
     </section>
 

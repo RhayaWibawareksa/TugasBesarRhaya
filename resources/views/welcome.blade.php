@@ -102,8 +102,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="display-4 fw-bold">Belajar Matematika & Sains Lebih Mudah</h1>
-                    <p class="lead">Platform belajar online dengan metode interaktif, tutor berpengalaman, dan materi yang menarik untuk siswa SD, SMP, SMA.</p>
-                    <a href="daftar" class="btn btn-outline-light btn-lg me-3">Mulai Belajar</a>
+                    <p class="lead">Platform belajar online dengan metode interaktif, tutor berpengalaman, dan materi yang menarik untuk siswa sekolah.</p>
+                    <a href="register" class="btn btn-outline-light btn-lg me-3">Mulai Belajar</a>
                     <a href="tentang" class="btn btn-outline-light btn-lg">Pelajari Lebih Lanjut</a>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">
                             <p class="card-text">"LogicGen bikin belajar matematika jadi seru! Tutornya asik dan jelasinnya gampang dipahami."</p>
-                            <h6 class="card-title">- Daffa, Siswa SMP</h6>
+                            <h6 class="card-title">- Daffa, Siswa SMA</h6>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">
                             <p class="card-text">"Platformnya user-friendly dan bisa diakses kapan saja. Recommended buat persiapan ujian!"</p>
-                            <h6 class="card-title">- Rafi, Siswa SD</h6>
+                            <h6 class="card-title">- Rafi, Siswa SMA</h6>
                         </div>
                     </div>
                 </div>
