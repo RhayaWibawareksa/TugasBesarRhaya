@@ -225,7 +225,7 @@
         <div class="container text-center">
             <h2 class="mb-4">Jangan Lewatkan Diskon Terbatas!</h2>
             <p class="lead mb-4">Penawaran ini berlaku hingga 31 Desember 2026.</p>
-            <a href="paket" class="btn btn-custom btn-lg">Daftar Sekarang</a>
+            <a href="paket" class="btn btn-custom btn-lg">Lihat Paket</a>
         </div>
     </section>
 

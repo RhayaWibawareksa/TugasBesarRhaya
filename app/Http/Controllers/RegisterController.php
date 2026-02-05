@@ -18,6 +18,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255',
             'alamat' => 'required|string',
             'pilih_paket' => 'required|string|max:50',
+            'voucher_code' => 'nullable|string|max:100',
         ]);
 
         
@@ -29,6 +30,7 @@ class RegisterController extends Controller
             'email' => $validated['email'],
             'alamat' => $validated['alamat'],
             'pilih_paket' => $validated['pilih_paket'],
+            'voucher_code' => $validated['voucher_code'] ?? null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -69,6 +71,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255',
             'alamat' => 'required|string',
             'pilih_paket' => 'required|string|max:50',
+            'voucher_code' => 'nullable|string|max:100',
         ]);
 
         
@@ -82,6 +85,7 @@ class RegisterController extends Controller
                 'email' => $validated['email'],
                 'alamat' => $validated['alamat'],
                 'pilih_paket' => $validated['pilih_paket'],
+                'voucher_code' => $validated['voucher_code'] ?? null,
                 'updated_at' => now(),
             ]);
 

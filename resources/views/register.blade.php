@@ -56,6 +56,15 @@
         <form method="POST" action="{{ route('register.store') }}">
             @csrf
 
+            @if(request()->query('voucher'))
+                <div class="mb-3">
+                    <label class="form-label">Kode Voucher</label>
+                    <input type="text" class="form-control" name="voucher_code" value="{{ request()->query('voucher') }}" readonly>
+                </div>
+            @else
+                <input type="hidden" name="voucher_code" value="{{ old('voucher_code') }}">
+            @endif
+
             <div class="mb-2">
                 <label for="nama" class="form-label">Nama Lengkap</label>
                 <input type="text" class="form-control @error('nama') is-invalid @enderror" 

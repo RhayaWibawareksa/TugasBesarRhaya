@@ -14,6 +14,22 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        .sidebar {
+            min-height: 100vh;
+            border-right: 1px solid #e9ecef;
+        }
+        .sidebar .nav-link {
+            color: #495057;
+            padding: 10px 12px;
+            border-radius: 8px;
+        }
+        .sidebar .nav-link.active {
+            background: linear-gradient(90deg, #3577ea 0%, #4FC3F7 100%);
+            color: #fff;
+        }
+        .sidebar .navbar-brand {
+            font-size: 1.25rem;
+        }
         .hero-bg {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://png.pngtree.com/back_origin_pic/03/59/76/4b1c43ba785feb0d3b76aa472cbea4b6.jpg');
             background-size: cover;
@@ -64,6 +80,18 @@
             border-bottom: 1px solid #e9ecef;
             transition: background-color 0.2s;
         }
+        .paket-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .paket-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .paket-card.active {
+            background: linear-gradient(90deg, #3577ea 0%, #4FC3F7 100%);
+            color: #fff;
+        }
         .table-custom tbody tr:hover {
             background-color: #f0f8ff;
         }
@@ -112,15 +140,11 @@
     </style>
 </head>
 <body>
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="#">Bimble Online</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-md-3 col-lg-2 bg-light sidebar p-3 d-flex flex-column">
+                <a class="navbar-brand fw-bold text-primary mb-3" href="#">Bimble Online</a>
+                <ul class="nav nav-pills flex-column mb-3">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Beranda</a>
                     </li>
@@ -139,28 +163,26 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-link nav-link">Logout</button>
-                        </form>
-                    </li>
                 </ul>
-            </div>
-        </div>
-    </nav>
-
-    
-    <section class="hero-bg py-5">
-        <div class="container animate-fade-in">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold">Dashboard Admin</h1>
-                    <p class="lead">Kelola data pendaftaran siswa dan monitor aktivitas bimbel Anda.</p>
+                <div class="mt-auto">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger w-100">Logout</button>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </section>
+            </aside>
+
+            <main class="col-md-9 col-lg-10 py-4">
+                <section class="hero-bg py-5">
+                    <div class="container animate-fade-in">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <h1 class="display-4 fw-bold">Dashboard Admin</h1>
+                                <p class="lead">Kelola data pendaftaran siswa dan monitor aktivitas bimbel Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
     
     <section class="py-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
@@ -214,6 +236,35 @@
                 </div>
             @endif
 
+            @php
+                $groups = collect($pendaftaran ?? [])->groupBy('pilih_paket')->map(function($items) {
+                    return count($items);
+                });
+            @endphp
+
+            @if($groups && $groups->count() > 0)
+                <h4 class="mb-3 fw-bold">Ringkasan Pendaftar per Paket</h4>
+                <div class="row mb-4">
+                    @foreach($groups as $paket => $count)
+                        <div class="col-md-3">
+                            <div class="card p-3 mb-2 paket-card" data-paket="{{ $paket }}" role="button">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">{{ $paket }}</h6>
+                                        <div class="h4 mb-0">{{ $count }}</div>
+                                    </div>
+                                    <div class="ms-3">
+                                        <i class="bi bi-people" style="font-size: 1.8rem; color: #3577ea;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            <div id="filterInfo" class="mb-3" style="display:none;"></div>
+
             <h2 class="mb-4 fw-bold">Data Pendaftar Bimbel</h2>
             
             @if($pendaftaran && count($pendaftaran) > 0)
@@ -233,7 +284,7 @@
                         </thead>
                         <tbody>
                             @foreach($pendaftaran as $key => $data)
-                                <tr>
+                                <tr data-paket="{{ $data->pilih_paket }}">
                                     <td>{{ $key + 1 }}</td>
                                     <td><strong>{{ $data->nama }}</strong></td>
                                     <td>{{ $data->asal_sekolah }}</td>
@@ -329,6 +380,38 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paketCards = document.querySelectorAll('.paket-card');
+            const rows = document.querySelectorAll('table tbody tr');
+            const filterInfo = document.getElementById('filterInfo');
+
+            function clearFilter() {
+                paketCards.forEach(c => c.classList.remove('active'));
+                rows.forEach(r => r.style.display = '');
+                filterInfo.style.display = 'none';
+            }
+
+            paketCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const paket = this.dataset.paket;
+                    paketCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    rows.forEach(r => {
+                        if (r.dataset.paket === paket) {
+                            r.style.display = '';
+                        } else {
+                            r.style.display = 'none';
+                        }
+                    });
+                    filterInfo.style.display = 'block';
+                    filterInfo.innerHTML = 'Menampilkan paket: <strong>' + paket + '</strong> <button id="clearFilterBtn" class="btn btn-sm btn-outline-secondary ms-2">Bersihkan</button>';
+                    document.getElementById('clearFilterBtn').addEventListener('click', clearFilter);
+                });
+            });
+        });
+    </script>
 
     <script>
         @if(session('success'))
