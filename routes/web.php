@@ -54,3 +54,11 @@ Route::put('/pendaftar/{id}', [RegisterController::class, 'update'])->name('pend
 Route::delete('/pendaftar/{id}', [RegisterController::class, 'destroy'])->name('pendaftar.destroy');
 
 Route::resource('packages', PackageController::class);
+
+
+// API Routes untuk Voucher
+Route::prefix('api')->group(function () {
+    Route::get('/vouchers', [DiscountController::class, 'index']);
+    Route::post('/vouchers/claim', [DiscountController::class, 'claim']);
+    Route::get('/vouchers/{code}', [DiscountController::class, 'show']);
+});

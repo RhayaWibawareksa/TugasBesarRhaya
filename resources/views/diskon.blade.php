@@ -196,7 +196,7 @@
                     <div class="card h-100 border-0 shadow-sm diskon-card">
                         <div class="card-body text-center">
                             <h5 class="card-title"><i class="bi bi-percent"></i> Diskon 30%</h5>
-                            <p class="card-text">Untuk paket Matematika SD. Harga normal Rp 500.000, sekarang Rp 350.000.</p>
+                            <p class="card-text">Untuk paket Matematika SD. Harga normal Rp 500.000, sekarang Rp 345.000.</p>
                         </div>
                     </div>
                 </div>
