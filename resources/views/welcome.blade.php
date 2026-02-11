@@ -140,7 +140,7 @@
                     <div class="card h-100 border-0 shadow-sm interactive-class-card">
                         <div class="card-body text-center">
                             <h5 class="card-title">Interactive Class</h5>
-                            <p class="card-text">Kelas seru dengan dukungan teknologi pendukung belajar.</p>
+                            <p class="card-text">Kelas seru dengan dukungan teknologi pendukung belajar. </p>
                         </div>
                     </div>
                 </div>
